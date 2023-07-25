@@ -51,7 +51,7 @@ class Client(BaseClient):
                 self.sock_reader._transport = None
             else:
                 self.sock_reader._paused = True
-        
+
         end = 0
         while end < len(data):
             # While chunks are available in data
@@ -133,7 +133,7 @@ class Client(BaseClient):
                                        small_text=small_text, party_id=party_id, party_size=party_size, join=join,
                                        spectate=spectate, match=match, buttons=buttons, instance=instance,
                                        activity=True)
-        
+
         self.send_data(1, payload)
         return self.loop.run_until_complete(self.read_output())
 
@@ -175,8 +175,8 @@ class Client(BaseClient):
         payload = Payload.get_soundboard_sounds()
         self.send_data(1, payload)
         return self.loop.run_until_complete(self.read_output())
-    
-    def play_soundboard_sound(self, sound_id: str, guild_id: str = "DEFAULT"):
+
+    def play_soundboard_sound(self, sound_id: str, guild_id: str):
         payload = Payload.play_soundboard_sound(sound_id, guild_id)
         self.send_data(1, payload)
         return self.loop.run_until_complete(self.read_output())
@@ -359,6 +359,16 @@ class AioClient(BaseClient):
                                  deaf: bool = None, mute: bool = None):
         payload = Payload.set_voice_settings(_input, output, mode, automatic_gain_control, echo_cancellation,
                                              noise_suppression, qos, silence_warning, deaf, mute)
+        self.send_data(1, payload)
+        return await self.read_output()
+
+    async def get_soundboard_sounds(self):
+        payload = Payload.get_soundboard_sounds()
+        self.send_data(1, payload)
+        return await self.read_output()
+
+    async def play_soundboard_sound(self, sound_id: str, guild_id: str):
+        payload = Payload.play_soundboard_sound(sound_id, guild_id)
         self.send_data(1, payload)
         return await self.read_output()
 
