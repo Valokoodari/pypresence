@@ -171,6 +171,16 @@ class Client(BaseClient):
         self.send_data(1, payload)
         return self.loop.run_until_complete(self.read_output())
 
+    def get_soundboard_sounds(self):
+        payload = Payload.get_soundboard_sounds()
+        self.send_data(1, payload)
+        return self.loop.run_until_complete(self.read_output())
+    
+    def play_soundboard_sound(self, sound_id: str, guild_id: str = "DEFAULT"):
+        payload = Payload.play_soundboard_sound(sound_id, guild_id)
+        self.send_data(1, payload)
+        return self.loop.run_until_complete(self.read_output())
+
     def capture_shortcut(self, action: str):
         payload = Payload.capture_shortcut(action)
         self.send_data(1, payload)

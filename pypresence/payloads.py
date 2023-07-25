@@ -271,6 +271,28 @@ class Payload:
         return cls(payload, True)
 
     @classmethod
+    def get_soundboard_sounds(cls):
+        payload = {
+            "cmd": "GET_SOUNDBOARD_SOUNDS",
+            "nonce": '{:.20f}'.format(cls.time())
+        }
+
+        return cls(payload)
+
+    @classmethod
+    def play_soundboard_sound(cls, sound_id: str, guild_id: str = "DEFAULT"):
+        payload = {
+            "cmd": "PLAY_SOUNDBOARD_SOUND",
+            "args": {
+                'sound_id': str(sound_id),
+                'guild_id': str(guild_id),
+            },
+            "nonce": '{:.20f}'.format(cls.time())
+        }
+
+        return cls(payload)
+
+    @classmethod
     def capture_shortcut(cls, action: str):
         payload = {
             "cmd": "CAPTURE_SHORTCUT",
