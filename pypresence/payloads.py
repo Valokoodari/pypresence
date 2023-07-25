@@ -284,8 +284,8 @@ class Payload:
         payload = {
             "cmd": "PLAY_SOUNDBOARD_SOUND",
             "args": {
-                'sound_id': str(sound_id),
-                'guild_id': str(guild_id),
+                "sound_id": str(sound_id),
+                "guild_id": str(guild_id),
             },
             "nonce": '{:.20f}'.format(cls.time())
         }

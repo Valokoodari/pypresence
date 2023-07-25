@@ -176,7 +176,7 @@ class Client(BaseClient):
         self.send_data(1, payload)
         return self.loop.run_until_complete(self.read_output())
 
-    def play_soundboard_sound(self, sound_id: str, guild_id: str):
+    def play_soundboard_sound(self, sound_id: str, guild_id: str = "DEFAULT"):
         payload = Payload.play_soundboard_sound(sound_id, guild_id)
         self.send_data(1, payload)
         return self.loop.run_until_complete(self.read_output())
@@ -367,7 +367,7 @@ class AioClient(BaseClient):
         self.send_data(1, payload)
         return await self.read_output()
 
-    async def play_soundboard_sound(self, sound_id: str, guild_id: str):
+    async def play_soundboard_sound(self, sound_id: str, guild_id: str = "DEFAULT"):
         payload = Payload.play_soundboard_sound(sound_id, guild_id)
         self.send_data(1, payload)
         return await self.read_output()
