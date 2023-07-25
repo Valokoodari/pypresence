@@ -8,7 +8,7 @@ CLIENT_ID = ''  # Your client ID here
 
 
 def get_presence_data():
-    with requests.get('https://somewebsite.com/api/status') as resp:
+    with requests.get('https://somewebsite.com/api/status', timeout=5) as resp:
         data = resp.json()
     # Use the data in whatever way you want, and return kwargs for the Presence.update() method
     return {'state': data['online'].title(), 'details': 'SomeWebsite Status', 'start': data['start']}
